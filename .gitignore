@@ -1,0 +1,14 @@
+# Node
+node_modules/
+.vercel/
+
+# Env local (nunca commitar chaves reais)
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+Thumbs.db
+
+.vercel

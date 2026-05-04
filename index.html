@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cerâmica Gatto · Painel</title>
+<meta name="description" content="Painel interno Cerâmica Gatto — catálogo técnico, clientes, disparos via WhatsApp e atendimento com IA + handoff humano." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --bg-2: #ebe6d9;
+    --paper: #fbfaf5;
+    --ink: #181614;
+    --ink-2: #3a3631;
+    --muted: #7d756a;
+    --line: #d9d2c2;
+    --line-soft: #ebe5d4;
+    --green: #0e5c3a;
+    --green-2: #0a4128;
+    --green-soft: #d3e6db;
+    --red: #b41d28;
+    --red-2: #8a1620;
+    --red-soft: #f3d8da;
+    --terra: #c8553d;
+    --terra-2: #9a3a26;
+    --warn: #b88300;
+    --warn-soft: #f7e7b0;
+    --shadow-sm: 0 1px 2px rgba(24,22,20,.06);
+    --shadow: 0 1px 0 rgba(24,22,20,.05), 0 12px 28px -18px rgba(24,22,20,.25);
+    --shadow-lg: 0 1px 0 rgba(24,22,20,.05), 0 30px 60px -25px rgba(24,22,20,.4);
+    --r: 10px;
+    --r-lg: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Manrope", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 14.5px;
+    line-height: 1.5;
+    background-image:
+      radial-gradient(1100px 500px at 100% -10%, rgba(14,92,58,.08), transparent 60%),
+      radial-gradient(900px 600px at -10% 110%, rgba(180,29,40,.06), transparent 60%);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-variation-settings: "wdth" 90, "opsz" 96;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+  .shell { max-width: 1340px; margin: 0 auto; padding: 24px 28px 80px; }
+
+  /* HEADER */
+  header.top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; padding: 14px 18px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow);
+    flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand .logo {
+    width: 54px; height: 54px;
+    background: var(--paper);
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .brand .logo svg { width: 32px; height: 32px; }
+  .brand h1 {
+    margin: 0;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 75, "opsz" 96, "wght" 700;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .brand h1 em { font-style: normal; color: var(--red); }
+  .brand .sub {
+    display: block; font-size: 10px;
+    letter-spacing: .26em; text-transform: uppercase;
+    color: var(--muted); margin-top: 6px; font-weight: 600;
+  }
+  .head-info { text-align: right; font-size: 12px; }
+  .head-info .where { color: var(--muted); letter-spacing: .04em; }
+  .head-info .when { color: var(--ink); font-weight: 600; font-size: 14px; }
+
+  /* TABS */
+  nav.tabs {
+    display: flex; gap: 2px;
+    margin: 22px 0 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px;
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+  }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  nav.tabs button {
+    background: transparent; border: 0;
+    padding: 10px 18px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    color: var(--muted); cursor: pointer;
+    border-radius: 999px; white-space: nowrap;
+    transition: all .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  nav.tabs button:hover { color: var(--ink); }
+  nav.tabs button.active {
+    background: var(--ink); color: var(--paper);
+    box-shadow: 0 4px 12px -4px rgba(24,22,20,.4);
+  }
+  nav.tabs .badge {
+    background: rgba(255,255,255,.18);
+    padding: 1px 8px; border-radius: 999px;
+    font-size: 11px; font-weight: 700;
+  }
+  nav.tabs button:not(.active) .badge { background: var(--bg-2); color: var(--ink-2); }
+  nav.tabs .pulse {
+    width: 7px; height: 7px;
+    background: var(--red); border-radius: 50%;
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(180,29,40,.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(180,29,40,0); }
+    100% { box-shadow: 0 0 0 0 rgba(180,29,40,0); }
+  }
+
+  /* SECTIONS */
+  section.view { display: none; }
+  section.view.active { display: block; animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .section-head {
+    display: flex; align-items: end; justify-content: space-between;
+    gap: 18px; margin-bottom: 22px; flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 80, "opsz" 96, "wght" 700;
+    font-size: 38px;
+    margin: 0 0 4px; line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  .section-head h2 em { font-style: normal; color: var(--green); }
+  .section-head .desc { color: var(--muted); font-size: 13px; max-width: 520px; }
+
+  /* KPIs */
+  .kpis {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 14px; margin-bottom: 30px;
+  }
+  .kpi {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--r-lg); padding: 18px 20px;
+    box-shadow: var(--shadow); position: relative; overflow: hidden;
+  }
+  .kpi.green { border-top: 3px solid var(--green); }
+  .kpi.red   { border-top: 3px solid var(--red); }
+  .kpi.terra { border-top: 3px solid var(--terra); }
+  .kpi.dark  { border-top: 3px solid var(--ink); }
+  .kpi .label {
+    font-size: 10px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+  .kpi .value {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 75, "opsz" 96, "wght" 700;
+    font-size: 42px; margin-top: 4px;
+    color: var(--ink); line-height: 1; letter-spacing: -0.02em;
+  }
+  .kpi .value small {
+    font-size: 13px; color: var(--muted); margin-right: 3px;
+    font-variation-settings: "wdth" 100, "wght" 500;
+  }
+  .kpi .hint { font-size: 12px; color: var(--ink-2); margin-top: 6px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    background: var(--ink); color: var(--paper);
+    border: 1px solid var(--ink); border-radius: 8px;
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s;
+    text-decoration: none; line-height: 1.2;
+  }
+  .btn:hover { background: var(--green); border-color: var(--green); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .btn.green { background: var(--green); border-color: var(--green); }
+  .btn.green:hover { background: var(--green-2); border-color: var(--green-2); }
+  .btn.red { background: var(--red); border-color: var(--red); }
+  .btn.red:hover { background: var(--red-2); border-color: var(--red-2); }
+  .btn.danger { background: transparent; color: var(--red); border-color: var(--red); }
+  .btn.danger:hover { background: var(--red); color: var(--paper); }
+  .btn.sm { padding: 6px 12px; font-size: 12px; }
+  .btn.xs { padding: 4px 10px; font-size: 11px; }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn:disabled:hover { transform: none; background: var(--ink); }
+
+  /* PANELS */
+  .panel {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--r-lg); padding: 22px;
+    box-shadow: var(--shadow);
+  }
+  .panel h3 {
+    margin: 0 0 4px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 85, "wght" 700;
+    font-size: 20px; letter-spacing: -0.01em;
+  }
+  .panel .desc { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+
+  /* TOOLBAR / SEARCH */
+  .toolbar {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .search { flex: 1; min-width: 220px; position: relative; }
+  .search input {
+    width: 100%;
+    padding: 11px 14px 11px 38px;
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit; font-size: 14px; color: var(--ink);
+  }
+  .search input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px var(--green-soft); }
+  .search svg {
+    position: absolute; left: 12px; top: 50%;
+    transform: translateY(-50%); color: var(--muted);
+  }
+
+  /* PRODUCTS */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .product {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--r-lg); overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .product:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .product .thumb {
+    aspect-ratio: 16/10;
+    background: linear-gradient(180deg, var(--bg-2), var(--bg));
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .product .thumb svg { width: 100%; height: 100%; display: block; }
+  .product .thumb .badge-cat {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--paper); color: var(--ink-2);
+    font-size: 10px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+    letter-spacing: .12em; text-transform: uppercase;
+    border: 1px solid var(--line);
+  }
+  .product .thumb .badge-stock {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 10px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .badge-stock.ok    { background: var(--green-soft); color: var(--green-2); }
+  .badge-stock.low   { background: var(--warn-soft);  color: var(--warn); }
+  .badge-stock.zero  { background: var(--red-soft);   color: var(--red-2); }
+  .product .body { padding: 14px 16px; flex: 1; }
+  .product h3 {
+    margin: 0 0 4px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 80, "wght" 700;
+    font-size: 19px; letter-spacing: -0.01em;
+  }
+  .product .id-pill {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; color: var(--muted);
+    background: var(--bg-2);
+    padding: 2px 8px; border-radius: 4px;
+    margin-left: 6px;
+  }
+  .specs {
+    margin-top: 10px;
+    border-top: 1px dashed var(--line);
+    padding-top: 10px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4px 10px; font-size: 11.5px;
+  }
+  .specs .k { color: var(--muted); font-weight: 500; }
+  .specs .v { color: var(--ink); font-weight: 600; text-align: right; font-family: "JetBrains Mono", monospace; font-size: 11px; }
+  .specs .full { grid-column: 1/-1; display: flex; justify-content: space-between; }
+
+  /* INLINE EDIT */
+  .inline-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 8px; padding: 12px 14px;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+  .inline-row .inline-field {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .inline-row label {
+    font-size: 9px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--muted); font-weight: 700;
+  }
+  .inline-row .input-wrap {
+    position: relative; display: flex;
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 7px; overflow: hidden;
+    transition: border-color .15s;
+  }
+  .inline-row .input-wrap:focus-within { border-color: var(--green); }
+  .inline-row .input-wrap .prefix,
+  .inline-row .input-wrap .suffix {
+    padding: 6px 8px; font-size: 11px;
+    color: var(--muted); background: var(--bg-2);
+    font-weight: 600; align-self: stretch; display: flex; align-items: center;
+  }
+  .inline-row .input-wrap input {
+    flex: 1; min-width: 0;
+    border: 0; padding: 6px 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px; font-weight: 600;
+    background: transparent; color: var(--ink);
+    text-align: right;
+  }
+  .inline-row .input-wrap input:focus { outline: none; }
+  .inline-row .saved {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px;
+    background: var(--green); color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800;
+    opacity: 0; transition: opacity .3s;
+    pointer-events: none;
+  }
+  .inline-row .saved.on { opacity: 1; }
+
+  .product .actions {
+    display: flex; gap: 6px; padding: 12px 14px;
+    border-top: 1px solid var(--line);
+  }
+  .product .actions .btn { flex: 1; justify-content: center; }
+
+  /* CUSTOMERS */
+  .customers {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--r-lg); overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  table.tbl { width: 100%; border-collapse: collapse; }
+  table.tbl th, table.tbl td {
+    text-align: left; padding: 13px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px; vertical-align: middle;
+  }
+  table.tbl th {
+    background: var(--bg-2);
+    font-size: 10px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--muted);
+    font-weight: 700;
+  }
+  table.tbl tr:last-child td { border-bottom: 0; }
+  table.tbl tr:hover td { background: rgba(14,92,58,.03); }
+  table.tbl td strong { font-weight: 700; }
+
+  .tag {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px; letter-spacing: .02em; font-weight: 600;
+    margin-right: 4px; margin-bottom: 4px;
+    border: 1px solid transparent; line-height: 1.4;
+  }
+  .tag.vip          { background: #f5e3c1; color: #6e4a14; border-color: #e2c890; }
+  .tag.atacado      { background: var(--green-soft); color: var(--green-2); border-color: #a8cdb6; }
+  .tag.varejo       { background: #ddd2c0; color: #4a3a2d; border-color: #c5b89f; }
+  .tag.construtora  { background: #d6dee8; color: #1f3850; border-color: #a8b8c6; }
+  .tag.revenda      { background: #e6dcf0; color: #3d2657; border-color: #c2b3d4; }
+  .tag.pessoa-fisica{ background: #e0e0e0; color: #3a3631; border-color: #c4c4c4; }
+  .tag.inadimplente { background: var(--red-soft); color: var(--red-2); border-color: #d8a8ad; }
+  .tag.inativo      { background: #e5e0d8; color: #8a7a68; border-color: #c8c0b3; }
+
+  /* DISPARO */
+  .grid-2 { display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px; }
+
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block; font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 7px; font-weight: 700;
+  }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 13px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--bg); font-size: 12px; font-weight: 600;
+    cursor: pointer; user-select: none;
+    transition: all .15s;
+  }
+  .chip:hover { border-color: var(--ink-2); }
+  .chip.on { background: var(--green); color: var(--paper); border-color: var(--green); }
+  .chip .x {
+    background: rgba(0,0,0,.1); padding: 1px 7px;
+    border-radius: 999px; font-size: 10px;
+  }
+  .chip.on .x { background: rgba(255,255,255,.2); }
+
+  textarea, input[type="text"], input[type="number"], input[type="tel"], select {
+    width: 100%; padding: 10px 13px;
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: 9px; font-family: inherit;
+    font-size: 13.5px; color: var(--ink); resize: vertical;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  textarea { min-height: 130px; line-height: 1.55; }
+  textarea:focus, input:focus, select:focus {
+    outline: none; border-color: var(--green);
+    box-shadow: 0 0 0 3px var(--green-soft);
+  }
+
+  .placeholders { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+  .placeholders span.lbl { font-size: 11px; color: var(--muted); margin-right: 4px; }
+  .placeholders code {
+    background: var(--bg-2); padding: 3px 9px;
+    border-radius: 5px; font-size: 11.5px;
+    cursor: pointer; font-family: "JetBrains Mono", monospace;
+    border: 1px solid var(--line); transition: all .15s; font-weight: 600;
+  }
+  .placeholders code:hover { background: var(--green); color: var(--paper); border-color: var(--green); }
+
+  .product-pick {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 6px; max-height: 260px; overflow-y: auto;
+    padding: 4px;
+    border: 1px solid var(--line); border-radius: 10px;
+  }
+  .product-pick .item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid transparent; border-radius: 8px;
+    cursor: pointer; transition: all .15s;
+  }
+  .product-pick .item:hover { background: var(--bg-2); }
+  .product-pick .item.on { background: var(--green-soft); border-color: var(--green); }
+  .product-pick .item .mini {
+    width: 36px; height: 36px;
+    border-radius: 6px; flex-shrink: 0;
+    background: var(--bg-2); overflow: hidden;
+  }
+  .product-pick .item .mini svg { width: 100%; height: 100%; }
+  .product-pick .item .info { font-size: 12px; line-height: 1.3; min-width: 0; }
+  .product-pick .item .info b {
+    display: block; font-weight: 700; font-size: 13px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .product-pick .item .info span { color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 11px; }
+
+  .recipients-head {
+    display: flex; justify-content: space-between;
+    align-items: baseline; margin-bottom: 10px;
+  }
+  .recipients-head .num {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 75, "wght" 700;
+    font-size: 38px; color: var(--green); line-height: 1;
+  }
+  .recipients-head .num small { color: var(--muted); font-size: 12px; font-weight: 500; font-variation-settings: "wdth" 100; }
+
+  .recipient-list {
+    max-height: 260px; overflow-y: auto;
+    border: 1px dashed var(--line); border-radius: 10px;
+    padding: 5px; background: var(--bg);
+  }
+  .recipient {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 10px; border-radius: 7px; font-size: 13px;
+  }
+  .recipient:hover { background: var(--paper); }
+  .recipient .phone { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); margin-left: 6px; }
+  .recipient .open {
+    color: var(--green); font-size: 11px; font-weight: 600;
+    text-decoration: none; padding: 4px 10px;
+    border: 1px solid var(--line); border-radius: 999px;
+    background: var(--paper); transition: all .15s;
+  }
+  .recipient .open:hover { background: var(--green); color: var(--paper); border-color: var(--green); }
+
+  .empty {
+    text-align: center; padding: 40px 20px;
+    color: var(--muted); font-size: 13px;
+  }
+  .empty em {
+    display: block;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 80, "wght" 600;
+    font-style: normal; font-size: 17px;
+    color: var(--ink-2); margin-bottom: 6px;
+  }
+
+  /* PREVIEW WHATSAPP */
+  .preview-wrap {
+    margin-top: 14px; position: relative; padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .preview-card {
+    background: linear-gradient(180deg, #dcf8c6 0%, #c8eaa8 100%);
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #0b3d10; font-size: 13.5px;
+    line-height: 1.5; font-family: inherit;
+    white-space: pre-wrap; box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    position: relative; word-wrap: break-word;
+  }
+  .preview-card::after {
+    content: ""; position: absolute;
+    bottom: 0; right: -6px;
+    width: 14px; height: 14px;
+    background: #c8eaa8; border-radius: 0 0 0 14px;
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+  }
+  .preview-tag {
+    position: absolute; top: 0; left: 14px;
+    background: var(--paper); color: var(--muted);
+    font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+    padding: 2px 10px; border-radius: 999px;
+    border: 1px solid var(--line); font-weight: 700;
+  }
+
+  .broadcast-actions {
+    display: flex; gap: 10px; margin-top: 16px;
+    padding: 14px;
+    background: var(--ink); border-radius: 12px;
+    align-items: center; justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .broadcast-actions .info { color: var(--paper); font-size: 13px; }
+  .broadcast-actions .info b { color: #ff8b94; font-family: "Bricolage Grotesque", sans-serif; font-variation-settings: "wdth" 75, "wght" 700; font-size: 18px; }
+  .broadcast-actions .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .broadcast-actions .btn { background: var(--green); border-color: var(--green); }
+  .broadcast-actions .btn:hover { background: var(--green-2); border-color: var(--green-2); transform: none; }
+  .broadcast-actions .btn.ghost { background: transparent; color: var(--paper); border-color: rgba(255,255,255,.3); }
+  .broadcast-actions .btn.ghost:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+  /* CHAT (ATENDIMENTO) */
+  .chat-wrap {
+    display: grid; grid-template-columns: 320px 1fr;
+    gap: 14px; height: 640px;
+  }
+  .chat-list {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--r-lg); overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: var(--shadow);
+  }
+  .chat-list-head {
+    padding: 14px 16px; border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .chat-list-head h3 {
+    margin: 0; font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 80, "wght" 700;
+    font-size: 17px; letter-spacing: -0.01em;
+  }
+  .chat-list-head .desc { font-size: 11px; color: var(--muted); }
+  .chat-list-items { overflow-y: auto; flex: 1; }
+  .chat-item {
+    padding: 12px 16px; cursor: pointer;
+    border-bottom: 1px solid var(--line-soft);
+    transition: background .15s;
+    position: relative;
+  }
+  .chat-item:hover { background: var(--bg); }
+  .chat-item.active { background: var(--green-soft); border-left: 3px solid var(--green); padding-left: 13px; }
+  .chat-item .row1 {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 3px;
+  }
+  .chat-item .name {
+    font-weight: 700; font-size: 14px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    flex: 1; min-width: 0;
+  }
+  .chat-item .ts {
+    font-size: 10px; color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    flex-shrink: 0; margin-left: 6px;
+  }
+  .chat-item .row2 {
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 6px;
+  }
+  .chat-item .preview {
+    font-size: 12px; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    flex: 1;
+  }
+  .chat-item .badges { display: flex; gap: 4px; align-items: center; flex-shrink: 0; }
+  .status-pill {
+    font-size: 9px; font-weight: 700;
+    padding: 2px 7px; border-radius: 999px;
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .status-pill.ai     { background: #e0d7f5; color: #4a2c8a; border: 1px solid #c5b3e8; }
+  .status-pill.human  { background: var(--green-soft); color: var(--green-2); border: 1px solid #a8cdb6; }
+  .unread-dot {
+    width: 8px; height: 8px;
+    background: var(--red); border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .chat-conv {
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: var(--r-lg); overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: var(--shadow);
+  }
+  .chat-head {
+    padding: 14px 18px; border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+    display: flex; justify-content: space-between;
+    align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .chat-head .who { display: flex; align-items: center; gap: 12px; }
+  .chat-head .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--green-2));
+    color: white; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 16px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 80;
+  }
+  .chat-head .info-name { font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .chat-head .info-phone { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--muted); }
+  .chat-head .controls { display: flex; gap: 8px; align-items: center; }
+
+  .chat-msgs {
+    flex: 1; overflow-y: auto;
+    padding: 18px;
+    background:
+      var(--bg)
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='2' cy='2' r='.5' fill='%23d9d2c2' opacity='.3'/></svg>");
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .msg {
+    max-width: 75%; padding: 9px 14px;
+    border-radius: 14px; font-size: 14px;
+    line-height: 1.45; word-wrap: break-word;
+    position: relative; box-shadow: 0 1px 1px rgba(0,0,0,.06);
+  }
+  .msg .ts {
+    font-size: 9.5px; color: rgba(0,0,0,.45);
+    margin-top: 3px; text-align: right;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .msg.from-customer {
+    align-self: flex-start;
+    background: var(--paper); border-radius: 14px 14px 14px 4px;
+    color: var(--ink);
+  }
+  .msg.from-ai {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #ebe1ff, #d9c8ff);
+    border-radius: 14px 14px 4px 14px;
+    color: #2d1a5c;
+  }
+  .msg.from-ai::before {
+    content: "🤖 IA"; display: block; font-size: 9px;
+    font-weight: 700; letter-spacing: .12em;
+    color: #5a3aa0; margin-bottom: 2px;
+  }
+  .msg.from-human {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #d8f0e2, #b8e3c8);
+    border-radius: 14px 14px 4px 14px;
+    color: #0b3d10;
+  }
+  .msg.from-human::before {
+    content: "👤 ATENDENTE"; display: block; font-size: 9px;
+    font-weight: 700; letter-spacing: .12em;
+    color: var(--green-2); margin-bottom: 2px;
+  }
+  .msg.typing {
+    align-self: flex-end;
+    background: rgba(235,225,255,.6);
+    padding: 12px 16px;
+    color: #5a3aa0; font-size: 13px;
+  }
+  .msg.typing .dots span {
+    display: inline-block; width: 6px; height: 6px;
+    background: #5a3aa0; border-radius: 50%; margin: 0 1px;
+    animation: typing 1.2s infinite;
+  }
+  .msg.typing .dots span:nth-child(2) { animation-delay: .2s; }
+  .msg.typing .dots span:nth-child(3) { animation-delay: .4s; }
+  @keyframes typing { 0%,60%,100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+  .chat-input-area {
+    padding: 12px 16px; border-top: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .ai-banner {
+    background: linear-gradient(90deg, #ebe1ff, #d9c8ff);
+    border: 1px solid #c5b3e8; border-radius: 8px;
+    padding: 10px 14px; font-size: 12.5px;
+    color: #2d1a5c; display: flex;
+    justify-content: space-between; align-items: center;
+    gap: 10px; margin-bottom: 10px; flex-wrap: wrap;
+  }
+  .ai-banner.taken {
+    background: linear-gradient(90deg, var(--green-soft), #c5e0d2);
+    border-color: #a8cdb6; color: var(--green-2);
+  }
+  .ai-banner b { font-weight: 700; }
+  .chat-input {
+    display: flex; gap: 8px; align-items: end;
+  }
+  .chat-input textarea {
+    flex: 1; min-height: 42px; max-height: 120px;
+    padding: 10px 14px; resize: none;
+    border-radius: 999px; line-height: 1.4;
+  }
+  .chat-input textarea:disabled {
+    background: var(--bg-2); cursor: not-allowed; color: var(--muted);
+  }
+  .chat-input .send {
+    width: 42px; height: 42px; padding: 0;
+    border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--green); border-color: var(--green);
+  }
+  .chat-input .send:hover { background: var(--green-2); border-color: var(--green-2); }
+  .chat-input .send:disabled { background: var(--bg-2); border-color: var(--line); color: var(--muted); }
+
+  /* MODAL */
+  .modal-bg {
+    position: fixed; inset: 0;
+    background: rgba(24,22,20,.55);
+    backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 20px;
+    animation: fade .2s;
+  }
+  .modal-bg.on { display: flex; }
+  .modal {
+    background: var(--paper);
+    border-radius: 16px; padding: 26px;
+    max-width: 540px; width: 100%;
+    max-height: 90vh; overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+  }
+  .modal h3 {
+    margin: 0 0 4px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-variation-settings: "wdth" 80, "wght" 700;
+    font-size: 24px; letter-spacing: -0.02em;
+  }
+  .modal .desc { color: var(--muted); margin-bottom: 18px; font-size: 13px; }
+  .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .modal-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .modal .field { margin-bottom: 14px; }
+  .modal-actions {
+    display: flex; gap: 10px; justify-content: flex-end;
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .specs-editor {
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--bg); padding: 10px;
+    border-radius: 8px; border: 1px solid var(--line);
+  }
+  .spec-row {
+    display: grid; grid-template-columns: 1fr 1fr auto;
+    gap: 6px;
+  }
+  .spec-row input { padding: 7px 10px; font-size: 12.5px; background: var(--paper); }
+  .spec-row .btn { padding: 0 10px; font-size: 16px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--paper);
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    box-shadow: 0 12px 30px -10px rgba(0,0,0,.4);
+    z-index: 200;
+    animation: toastIn .25s ease;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .toast.success { background: var(--green); }
+  .toast.error   { background: var(--red); }
+  @keyframes toastIn { from { transform: translate(-50%, 20px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+
+  /* FOOTER */
+  footer.bottom {
+    margin-top: 50px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 12px;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .chat-wrap { grid-template-columns: 1fr; height: auto; }
+    .chat-list { max-height: 280px; }
+    .chat-conv { height: 600px; }
+    .shell { padding: 18px 16px; }
+    .section-head h2 { font-size: 30px; }
+    .modal-row, .modal-row-3 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    table.tbl th:nth-child(3), table.tbl td:nth-child(3) { display: none; }
+    .product-pick { grid-template-columns: 1fr; }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- HEADER -->
+  <header class="top">
+    <div class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <!-- Telhado estilizado -->
+          <path d="M4 22 L16 8 L28 22 Z" fill="none" stroke="#0e5c3a" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M11 22 L11 16 L21 16 L21 22" fill="none" stroke="#b41d28" stroke-width="2" stroke-linejoin="round"/>
+          <line x1="4" y1="22" x2="28" y2="22" stroke="#0e5c3a" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="display">Cerâmica <em>Gatto</em></h1>
+        <span class="sub">36 anos · Sul da Bahia · Painel interno</span>
+      </div>
+    </div>
+    <div class="head-info">
+      <div class="when" id="clockTime">—</div>
+      <div class="where" id="clockDate">—</div>
+    </div>
+  </header>
+
+  <!-- TABS -->
+  <nav class="tabs" id="tabs">
+    <button data-tab="overview" class="active">Visão geral</button>
+    <button data-tab="products">Produtos <span class="badge" id="cProducts">0</span></button>
+    <button data-tab="customers">Clientes <span class="badge" id="cCustomers">0</span></button>
+    <button data-tab="broadcast">Disparo</button>
+    <button data-tab="chat">
+      Atendimento
+      <span class="badge" id="cChat">0</span>
+      <span class="pulse" id="chatPulse" style="display:none"></span>
+    </button>
+  </nav>
+
+  <!-- OVERVIEW -->
+  <section class="view active" data-view="overview">
+    <div class="kpis">
+      <div class="kpi green">
+        <div class="label">Produtos no catálogo</div>
+        <div class="value" id="kpiProducts">0</div>
+        <div class="hint" id="kpiProductsHint">— disponíveis</div>
+      </div>
+      <div class="kpi dark">
+        <div class="label">Base de clientes</div>
+        <div class="value" id="kpiCustomers">0</div>
+        <div class="hint" id="kpiCustomersHint">cadastrados</div>
+      </div>
+      <div class="kpi red">
+        <div class="label">Conversas abertas</div>
+        <div class="value" id="kpiChats">0</div>
+        <div class="hint" id="kpiChatsHint">no atendimento</div>
+      </div>
+      <div class="kpi terra">
+        <div class="label">Valor de tabela</div>
+        <div class="value"><small>R$</small><span id="kpiStockValue">0</span></div>
+        <div class="hint">soma · base milheiro</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2 class="display">Resumo da <em>operação</em></h2>
+        <p class="desc">Distribuição de clientes por tag, status do atendimento e produtos com estoque crítico. Use as abas acima para gerenciar o catálogo, a base e os disparos.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Clientes por tag</h3>
+        <p class="desc">Distribuição da base segmentada.</p>
+        <div id="tagDistribution"></div>
+      </div>
+      <div class="panel">
+        <h3>Estoque crítico</h3>
+        <p class="desc">Produtos com estoque baixo ou esgotados.</p>
+        <div id="lowStockList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="view" data-view="products">
+    <div class="section-head">
+      <div>
+        <h2 class="display">Catálogo <em>técnico</em></h2>
+        <p class="desc">Telhas, lajotas e cobogós. Edite preço por milheiro e estoque direto no card, ou abra o editor completo pra mexer nas specs técnicas.</p>
+      </div>
+      <button class="btn green" onclick="openProductModal()">＋ Cadastrar peça</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="productSearch" placeholder="Buscar por nome ou categoria…" />
+      </div>
+    </div>
+
+    <div class="products" id="productsGrid"></div>
+  </section>
+
+  <!-- CUSTOMERS -->
+  <section class="view" data-view="customers">
+    <div class="section-head">
+      <div>
+        <h2 class="display">Base de <em>clientes</em></h2>
+        <p class="desc">Construtoras, revendas e clientes finais. Use tags para segmentar e atingir o público certo no disparo.</p>
+      </div>
+      <button class="btn green" onclick="openCustomerModal()">＋ Cadastrar cliente</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="customerSearch" placeholder="Buscar por nome, telefone ou tag…" />
+      </div>
+    </div>
+
+    <div class="customers">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>WhatsApp</th>
+            <th>Tags</th>
+            <th>Cidade</th>
+            <th style="text-align:right">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="customersBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BROADCAST -->
+  <section class="view" data-view="broadcast">
+    <div class="section-head">
+      <div>
+        <h2 class="display">Disparo <em>segmentado</em></h2>
+        <p class="desc">Filtre por tags, escolha uma peça do catálogo e personalize a mensagem. Cada cliente abre numa janela do WhatsApp Web — você revisa e envia.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>Configurar campanha</h3>
+        <p class="desc">Combine as tags abaixo para refinar o público.</p>
+
+        <div class="field">
+          <label>1 · Filtrar por tags</label>
+          <div class="chip-row" id="tagChips"></div>
+        </div>
+
+        <div class="field">
+          <label>2 · Selecionar peça (opcional)</label>
+          <div class="product-pick" id="productPick"></div>
+        </div>
+
+        <div class="field">
+          <label>3 · Mensagem</label>
+          <textarea id="messageText" placeholder="Escreva sua mensagem aqui…"></textarea>
+          <div class="placeholders">
+            <span class="lbl">Inserir:</span>
+            <code data-tag="{{nome}}">{{nome}}</code>
+            <code data-tag="{{produto}}">{{produto}}</code>
+            <code data-tag="{{preco}}">{{preco}}</code>
+            <code data-tag="{{cidade}}">{{cidade}}</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="recipients-head">
+          <div>
+            <h3>Destinatários</h3>
+            <p class="desc" style="margin:0">Pessoas que receberão a campanha.</p>
+          </div>
+          <div class="num"><span id="recipientCount">0</span> <small>contatos</small></div>
+        </div>
+
+        <div class="recipient-list" id="recipientList"></div>
+
+        <div class="preview-wrap">
+          <span class="preview-tag">Pré-visualização</span>
+          <div class="preview-card" id="messagePreview">Sua mensagem aparecerá aqui…</div>
+        </div>
+
+        <div class="broadcast-actions">
+          <div class="info">Pronto pra disparar para <b id="dispatchCount">0</b></div>
+          <div class="btns">
+            <button class="btn ghost" onclick="copyAllLinks()">Copiar links</button>
+            <button class="btn" onclick="dispatchAll()">📤 Abrir todos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAT / ATENDIMENTO -->
+  <section class="view" data-view="chat">
+    <div class="section-head">
+      <div>
+        <h2 class="display">Atendimento <em>via IA</em></h2>
+        <p class="desc">A IA responde sozinha enquanto você não tá disponível. Quando precisar, clica em "Assumir conversa" e o controle passa pra você. Devolve pra IA quando quiser.</p>
+      </div>
+      <button class="btn ghost sm" onclick="simulateIncoming()">＋ Simular nova mensagem</button>
+    </div>
+
+    <div class="chat-wrap">
+      <!-- Lista de conversas -->
+      <div class="chat-list">
+        <div class="chat-list-head">
+          <h3>Conversas</h3>
+          <div class="desc" id="chatListSummary">— ativas</div>
+        </div>
+        <div class="chat-list-items" id="chatListItems"></div>
+      </div>
+
+      <!-- Conversa ativa -->
+      <div class="chat-conv" id="chatConv">
+        <div class="chat-head" id="chatHead" style="display:none">
+          <div class="who">
+            <div class="avatar" id="chatAvatar">—</div>
+            <div>
+              <div class="info-name" id="chatName">—</div>
+              <div class="info-phone" id="chatPhone">—</div>
+            </div>
+          </div>
+          <div class="controls" id="chatControls"></div>
+        </div>
+        <div class="chat-msgs" id="chatMsgs">
+          <div class="empty" style="margin: auto;">
+            <em>Nenhuma conversa selecionada.</em>
+            Clica em uma conversa à esquerda para abrir.
+          </div>
+        </div>
+        <div class="chat-input-area" id="chatInputArea" style="display:none">
+          <div class="ai-banner" id="aiBanner"></div>
+          <div class="chat-input">
+            <textarea id="chatInput" placeholder="Digite uma mensagem…" rows="1"></textarea>
+            <button class="btn send" id="chatSendBtn" onclick="sendHumanMsg()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bottom">
+    <span>Cerâmica Gatto · 0800 703 3242 · (73) 99944-4820 · Painel interno v0.3</span>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <span id="evoStatus" style="font-size:11px;display:flex;align-items:center;gap:5px;">
+        <span id="evoStatusDot" style="width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block;"></span>
+        <span id="evoStatusText">Evolution API: não configurada</span>
+      </span>
+      <button class="btn ghost xs" onclick="openEvoConfig()">⚙ Configurar API</button>
+      <span>Vercel + GitHub Pages</span>
+    </div>
+  </footer>
+</div>
+
+<!-- MODAL: Produto (criar/editar) -->
+<div class="modal-bg" id="productModal">
+  <div class="modal">
+    <h3 id="productModalTitle">Cadastrar peça</h3>
+    <p class="desc" id="productModalDesc">Telha, lajota, cobogó ou outro item do catálogo.</p>
+    <div class="field">
+      <label>Nome da peça</label>
+      <input type="text" id="pName" placeholder="Ex: Telha Colonial" />
+    </div>
+    <div class="modal-row">
+      <div class="field">
+        <label>Categoria</label>
+        <select id="pCategory">
+          <option>Telhas</option>
+          <option>Lajotas</option>
+          <option>Cobogós</option>
+          <option>Outros</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Cor visual</label>
+        <select id="pColor">
+          <option value="terra">Terracota</option>
+          <option value="brick">Tijolo</option>
+          <option value="rust">Ferrugem</option>
+          <option value="clay">Argila clara</option>
+          <option value="dark">Terra escura</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-row">
+      <div class="field">
+        <label>Preço por milheiro (R$)</label>
+        <input type="number" id="pPrice" min="0" step="0.01" placeholder="1850.00" />
+      </div>
+      <div class="field">
+        <label>Estoque (em milheiros)</label>
+        <input type="number" id="pStock" min="0" placeholder="50" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Ficha técnica</label>
+      <div class="specs-editor" id="specsEditor"></div>
+      <button class="btn ghost xs" type="button" onclick="addSpecRow()" style="margin-top:8px">＋ Adicionar especificação</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn danger" id="productDeleteBtn" onclick="deleteFromModal()" style="display:none;margin-right:auto;">Excluir</button>
+      <button class="btn ghost" onclick="closeModals()">Cancelar</button>
+      <button class="btn green" onclick="saveProduct()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Cliente -->
+<div class="modal-bg" id="customerModal">
+  <div class="modal">
+    <h3 id="customerModalTitle">Cadastrar cliente</h3>
+    <p class="desc">Use tags para segmentar futuros disparos.</p>
+    <div class="field">
+      <label>Nome / razão social</label>
+      <input type="text" id="cName" placeholder="Ex: Construtora Vega" />
+    </div>
+    <div class="modal-row">
+      <div class="field">
+        <label>WhatsApp (DDD + número)</label>
+        <input type="tel" id="cPhone" placeholder="73988887777" />
+      </div>
+      <div class="field">
+        <label>Cidade</label>
+        <input type="text" id="cCity" placeholder="Teixeira de Freitas" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Tags (separe por vírgula)</label>
+      <input type="text" id="cTags" placeholder="Construtora, VIP, Atacado" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn danger" id="customerDeleteBtn" onclick="deleteCustomerFromModal()" style="display:none;margin-right:auto;">Excluir</button>
+      <button class="btn ghost" onclick="closeModals()">Cancelar</button>
+      <button class="btn green" onclick="saveCustomer()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+ *  DADOS — substitua aqui pelos produtos e clientes reais
+ *  Os preços são estimativas — ajuste em "Editar" no card.
+ * ========================================================================= */
+
+const SEED_PRODUCTS = [
+  {
+    id: 'p1', name: 'Telha Copeira', category: 'Telhas', color: 'terra',
+    pricePerThousand: 1850, stock: 18,
+    specs: [
+      ['Peso por peça', '1.800 kg ±'],
+      ['Quant. metro linear', '03'],
+      ['Comprimento', '42 cm'],
+      ['Largura', '20 cm'],
+    ]
+  },
+  {
+    id: 'p2', name: 'Telhas Duplan Portuguesa', category: 'Telhas', color: 'brick',
+    pricePerThousand: 1950, stock: 12,
+    specs: [
+      ['Peso por peça', '1.900 kg ±'],
+      ['Inclinação', '35% à 40%'],
+      ['Pç por carga truck', '8.000'],
+      ['Peças por m²', '17'],
+      ['Largura', '21,5 cm'],
+      ['Comprimento', '41 cm'],
+      ['Galga', '33 cm'],
+    ]
+  },
+  {
+    id: 'p3', name: 'Telhas Colonial', category: 'Telhas', color: 'terra',
+    pricePerThousand: 1750, stock: 25,
+    specs: [
+      ['Peso por peça', '2.300 kg ±'],
+      ['Inclinação', '35% à 40%'],
+      ['Pç por carga truck', '8.000'],
+      ['Peças por m²', '27'],
+      ['Largura', '17 cm'],
+      ['Comprimento', '47 cm'],
+      ['Galga', '40 cm'],
+    ]
+  },
+  {
+    id: 'p4', name: 'Telhas Plan Gatto', category: 'Telhas', color: 'rust',
+    pricePerThousand: 1680, stock: 8,
+    specs: [
+      ['Peso por peça', '2.400 kg ±'],
+      ['Inclinação', '30% à 40%'],
+      ['Peças por m²', '26'],
+    ]
+  },
+  {
+    id: 'p5', name: 'Lajota 19x19x09', category: 'Lajotas', color: 'brick',
+    pricePerThousand: 980, stock: 32,
+    specs: [
+      ['Peso por peça', '1.800 kg ±'],
+      ['Quant. de furos', '10'],
+      ['Pç por carga truck', '8.000'],
+      ['Peças por m²', '27'],
+      ['Comprimento', '19 cm'],
+      ['Altura', '19 cm'],
+      ['Largura', '9 cm'],
+    ]
+  },
+  {
+    id: 'p6', name: 'Lajota 29x19x09', category: 'Lajotas', color: 'brick',
+    pricePerThousand: 1450, stock: 4,
+    specs: [
+      ['Peso por peça', '2.700 kg ±'],
+      ['Quant. de furos', '10'],
+      ['Pç por carga truck', '5.000'],
+      ['Peças por m²', '18'],
+      ['Comprimento', '29 cm'],
+      ['Altura', '19 cm'],
+      ['Largura', '9 cm'],
+    ]
+  },
+  {
+    id: 'p7', name: 'Lajota 29x19x11,5', category: 'Lajotas', color: 'brick',
+    pricePerThousand: 1780, stock: 3,
+    specs: [
+      ['Peso por peça', '3.400 kg ±'],
+      ['Quant. de furos', '09'],
+      ['Pç por carga truck', '4.000'],
+      ['Peças por m²', '17'],
+      ['Comprimento', '29 cm'],
+      ['Altura', '19 cm'],
+      ['Largura', '11,5 cm'],
+    ]
+  },
+  {
+    id: 'p8', name: 'Lajota para Laje', category: 'Lajotas', color: 'rust',
+    pricePerThousand: 2100, stock: 14,
+    specs: [
+      ['Peso por peça', '2.300 kg ±'],
+      ['Quant. de furos', '06'],
+      ['Pç por carga truck', '6.000'],
+      ['Peças por m²', '12'],
+      ['Comprimento', '33 cm'],
+      ['Altura', '20 cm'],
+      ['Largura', '6 cm'],
+    ]
+  },
+  {
+    id: 'p9', name: 'Cobogó', category: 'Cobogós', color: 'terra',
+    pricePerThousand: 2400, stock: 6,
+    specs: [
+      ['Tipo', 'Vazado decorativo'],
+      ['Aplicação', 'Fachadas e divisórias'],
+    ]
+  },
+];
+
+const SEED_CUSTOMERS = [
+  { id: 'c1', name: 'Construtora Vega',    phone: '73988887777', city: 'Teixeira de Freitas', tags: ['Construtora','VIP','Atacado'] },
+  { id: 'c2', name: 'Materiais Eunápolis', phone: '73977776666', city: 'Eunápolis',           tags: ['Revenda','Atacado'] },
+  { id: 'c3', name: 'Casa & Obra Itamaraju',phone: '73966665555', city: 'Itamaraju',           tags: ['Revenda'] },
+  { id: 'c4', name: 'João Pedreiro',       phone: '73988889999', city: 'Teixeira de Freitas', tags: ['Pessoa Física'] },
+  { id: 'c5', name: 'Construtora Sá',      phone: '73999991111', city: 'Porto Seguro',        tags: ['Construtora','VIP'] },
+  { id: 'c6', name: 'Depósito Central',    phone: '73988882222', city: 'Itabela',             tags: ['Revenda','Atacado'] },
+  { id: 'c7', name: 'Marina Lopes',        phone: '73977773333', city: 'Teixeira de Freitas', tags: ['Pessoa Física'] },
+  { id: 'c8', name: 'Reforma Já',          phone: '73966664444', city: 'Caravelas',           tags: ['Revenda','Inadimplente'] },
+];
+
+const SEED_CONVERSATIONS = [
+  {
+    id: 'conv1', customerId: 'c2', status: 'ai', unread: true,
+    messages: [
+      { from: 'customer', text: 'Bom dia! Vocês têm telha colonial em estoque pra entrega em Eunápolis?', ts: Date.now() - 3600e3 * 2 },
+      { from: 'ai',       text: 'Bom dia! Sim, temos a Telha Colonial disponível em estoque. Pra Eunápolis fazemos entrega direta. Qual a quantidade aproximada que você precisa?', ts: Date.now() - 3600e3 * 2 + 90e3 },
+      { from: 'customer', text: 'Uns 5000 peças. Qual o valor do milheiro?', ts: Date.now() - 1800e3 },
+    ],
+  },
+  {
+    id: 'conv2', customerId: 'c4', status: 'ai', unread: false,
+    messages: [
+      { from: 'customer', text: 'oi', ts: Date.now() - 86400e3 },
+      { from: 'ai',       text: 'Olá! Aqui é da Cerâmica Gatto. Como posso te ajudar hoje?', ts: Date.now() - 86400e3 + 60e3 },
+      { from: 'customer', text: 'preciso saber a ficha tecnica da lajota 29x19x9', ts: Date.now() - 86400e3 + 180e3 },
+      { from: 'ai',       text: 'Claro! A Lajota 29x19x09 tem: peso 2.700kg/peça, 10 furos, 18 peças/m², 5.000 peças por carga truck. Posso enviar mais detalhes ou um orçamento?', ts: Date.now() - 86400e3 + 240e3 },
+    ],
+  },
+  {
+    id: 'conv3', customerId: 'c1', status: 'human', unread: false,
+    messages: [
+      { from: 'customer', text: 'Boa tarde, preciso de orçamento URGENTE pra obra que começa segunda', ts: Date.now() - 7200e3 },
+      { from: 'ai',       text: 'Boa tarde! Entendi a urgência. Vou transferir você para um atendente humano pra fechar o orçamento o quanto antes.', ts: Date.now() - 7200e3 + 60e3 },
+      { from: 'human',    text: 'Oi, aqui é o Márcio da Gatto. Já estou montando o orçamento — quantas peças e qual produto exatamente?', ts: Date.now() - 7200e3 + 300e3 },
+      { from: 'customer', text: '3000 telhas duplan portuguesa + 2000 lajotas 19x19x9. Pode mandar com frete?', ts: Date.now() - 6000e3 },
+    ],
+  },
+];
+
+const DEFAULT_MESSAGE = `Olá {{nome}}! Aqui é da Cerâmica Gatto.
+
+Estamos com pronta entrega de *{{produto}}* a {{preco}} por milheiro.
+
+Quer que eu monte um orçamento pra {{cidade}}? Atendemos toda a região com frete próprio.
+
+Cerâmica Gatto · 36 anos liderando o Sul da Bahia
+0800 703 3242 · (73) 99944-4820`;
+
+/* =========================================================================
+ *  ESTADO
+ * ========================================================================= */
+const state = {
+  products: JSON.parse(JSON.stringify(SEED_PRODUCTS)),
+  customers: JSON.parse(JSON.stringify(SEED_CUSTOMERS)),
+  conversations: JSON.parse(JSON.stringify(SEED_CONVERSATIONS)),
+  selectedTags: [],
+  selectedProductId: null,
+  messageText: DEFAULT_MESSAGE,
+  productSearch: '',
+  customerSearch: '',
+  editingProductId: null,
+  editingCustomerId: null,
+  activeConvId: null,
+  pendingSpecs: [],
+  // Evolution API config (persistida no localStorage)
+  evoBackendUrl: localStorage.getItem('evo_backend_url') || '',
+  evoEnabled: false,
+  lastPollTs: 0,
+};
+
+/* =========================================================================
+ *  HELPERS
+ * ========================================================================= */
+const $  = (s, p=document) => p.querySelector(s);
+const $$ = (s, p=document) => Array.from(p.querySelectorAll(s));
+const fmtBRL = v => Number(v||0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtInt = v => Number(v||0).toLocaleString('pt-BR');
+const slug   = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-');
+const uid    = () => Math.random().toString(36).slice(2,9);
+const sanitizePhone = p => (p||'').replace(/\D/g, '');
+const fmtPhone = p => (p||'').replace(/^(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3');
+const initials = name => (name||'').split(' ').slice(0,2).map(s=>s[0]||'').join('').toUpperCase();
+const tsLabel = ts => {
+  const d = new Date(ts), now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  if (sameDay) return d.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+  const days = Math.floor((now - d) / 86400000);
+  if (days === 1) return 'ontem';
+  if (days < 7) return d.toLocaleDateString('pt-BR', { weekday: 'short' });
+  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+};
+const allTags = () => {
+  const s = new Set();
+  state.customers.forEach(c => c.tags.forEach(t => s.add(t)));
+  return Array.from(s).sort();
+};
+const toast = (msg, type='') => {
+  const old = $('.toast'); if (old) old.remove();
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2400);
+};
+const findCustomer = id => state.customers.find(c => c.id === id);
+const findProduct  = id => state.products.find(p => p.id === id);
+const findConv     = id => state.conversations.find(c => c.id === id);
+
+/* =========================================================================
+ *  ARTE — SVG do produto
+ * ========================================================================= */
+const COLOR_PRESETS = {
+  terra: ['#d6694e', '#a13d24'],
+  brick: ['#c44a30', '#7a2614'],
+  rust:  ['#e08858', '#9c4520'],
+  clay:  ['#e6a07a', '#b86838'],
+  dark:  ['#8a3a22', '#4a1810'],
+};
+
+function productThumb(product) {
+  const [c1, c2] = COLOR_PRESETS[product.color] || COLOR_PRESETS.terra;
+  const cat = (product.category||'').toLowerCase();
+  const seed = product.id.charCodeAt(0) + product.id.length;
+  let shape = '';
+  if (cat.includes('telha')) {
+    // Telhas onduladas
+    shape = `
+      <g transform="translate(40, 60)">
+        <path d="M0 80 Q30 20 60 80 Q90 20 120 80 Q150 20 180 80 Q210 20 240 80 L240 100 L0 100 Z"
+              fill="url(#g${seed})" stroke="rgba(0,0,0,.25)" stroke-width="1.2"/>
+        <path d="M0 105 Q30 45 60 105 Q90 45 120 105 Q150 45 180 105 Q210 45 240 105 L240 125 L0 125 Z"
+              fill="url(#g${seed})" stroke="rgba(0,0,0,.3)" stroke-width="1.2" opacity=".88"/>
+      </g>`;
+  } else if (cat.includes('lajota')) {
+    // Lajota com furos
+    shape = `
+      <g transform="translate(60, 50)">
+        <rect x="0" y="0" width="200" height="120" rx="3" fill="url(#g${seed})" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+        <g fill="rgba(0,0,0,.55)">
+          <rect x="20" y="20" width="32" height="32" rx="2"/>
+          <rect x="60" y="20" width="32" height="32" rx="2"/>
+          <rect x="100" y="20" width="32" height="32" rx="2"/>
+          <rect x="140" y="20" width="32" height="32" rx="2"/>
+          <rect x="20" y="68" width="32" height="32" rx="2"/>
+          <rect x="60" y="68" width="32" height="32" rx="2"/>
+          <rect x="100" y="68" width="32" height="32" rx="2"/>
+          <rect x="140" y="68" width="32" height="32" rx="2"/>
+        </g>
+        <rect x="0" y="0" width="200" height="120" fill="url(#stripe${seed})" opacity=".25"/>
+      </g>`;
+  } else if (cat.includes('cobog')) {
+    // Cobogó vazado decorativo
+    shape = `
+      <g transform="translate(100, 40)">
+        <rect x="0" y="0" width="120" height="120" rx="4" fill="url(#g${seed})" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+        <g fill="rgba(0,0,0,.55)" transform="translate(15,15)">
+          <circle cx="22" cy="22" r="14"/>
+          <circle cx="68" cy="22" r="14"/>
+          <circle cx="22" cy="68" r="14"/>
+          <circle cx="68" cy="68" r="14"/>
+        </g>
+      </g>`;
+  } else {
+    shape = `<rect x="80" y="60" width="160" height="120" rx="6" fill="url(#g${seed})" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>`;
+  }
+
+  return `<svg viewBox="0 0 320 220" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="g${seed}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%"  stop-color="${c1}"/>
+        <stop offset="100%" stop-color="${c2}"/>
+      </linearGradient>
+      <pattern id="stripe${seed}" width="6" height="6" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,.2)" stroke-width=".5"/>
+      </pattern>
+    </defs>
+    ${shape}
+  </svg>`;
+}
+
+/* =========================================================================
+ *  TABS
+ * ========================================================================= */
+$('#tabs').addEventListener('click', e => {
+  const b = e.target.closest('button[data-tab]'); if (!b) return;
+  switchTab(b.dataset.tab);
+});
+function switchTab(name) {
+  $$('#tabs button').forEach(x => x.classList.toggle('active', x.dataset.tab === name));
+  $$('section.view').forEach(s => s.classList.toggle('active', s.dataset.view === name));
+}
+
+/* =========================================================================
+ *  OVERVIEW
+ * ========================================================================= */
+function renderOverview() {
+  const totalStock = state.products.reduce((s,p)=>s+(p.stock||0),0);
+  const stockValue = state.products.reduce((s,p)=>s+(p.stock||0)*(p.pricePerThousand||0),0);
+  const openConvs  = state.conversations.length;
+
+  $('#kpiProducts').textContent = state.products.length;
+  $('#kpiProductsHint').textContent = `${fmtInt(totalStock)} milheiros em estoque`;
+  $('#kpiCustomers').textContent = state.customers.length;
+  $('#kpiCustomersHint').textContent = `${allTags().length} tags ativas`;
+  $('#kpiChats').textContent = openConvs;
+  const unread = state.conversations.filter(c => c.unread).length;
+  $('#kpiChatsHint').textContent = unread ? `${unread} não lida(s)` : 'tudo em dia';
+  $('#kpiStockValue').textContent = fmtBRL(stockValue);
+
+  $('#cProducts').textContent = state.products.length;
+  $('#cCustomers').textContent = state.customers.length;
+  $('#cChat').textContent = openConvs;
+  $('#chatPulse').style.display = unread ? 'inline-block' : 'none';
+
+  // Tag distribution
+  const tagBox = $('#tagDistribution'); tagBox.innerHTML = '';
+  const tagCounts = {};
+  state.customers.forEach(c => c.tags.forEach(t => tagCounts[t] = (tagCounts[t]||0)+1));
+  const max = Math.max(1, ...Object.values(tagCounts));
+  Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).forEach(([t,n]) => {
+    const w = Math.round(n/max*100);
+    const row = document.createElement('div');
+    row.style.cssText = 'margin-bottom:10px;';
+    row.innerHTML = `
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;align-items:center;">
+        <span class="tag ${slug(t)}">${t}</span>
+        <span style="color:var(--ink);font-family:Bricolage Grotesque,sans-serif;font-variation-settings:'wdth' 75,'wght' 700;font-size:18px;">${n}</span>
+      </div>
+      <div style="background:var(--bg-2);height:6px;border-radius:3px;overflow:hidden;">
+        <div style="background:var(--green);height:100%;width:${w}%;border-radius:3px;transition:width .4s;"></div>
+      </div>`;
+    tagBox.appendChild(row);
+  });
+  if (!Object.keys(tagCounts).length) tagBox.innerHTML = '<div class="empty"><em>Sem clientes ainda.</em></div>';
+
+  // Low stock
+  const lowBox = $('#lowStockList'); lowBox.innerHTML = '';
+  const low = state.products.filter(p => (p.stock||0) <= 5).sort((a,b)=>(a.stock||0)-(b.stock||0));
+  if (!low.length) {
+    lowBox.innerHTML = '<div class="empty"><em>Tudo certo.</em>Nenhuma peça com estoque crítico.</div>';
+  } else {
+    low.forEach(p => {
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line);';
+      const cls = p.stock === 0 ? 'zero' : 'low';
+      row.innerHTML = `
+        <div>
+          <div style="font-weight:700;font-size:14.5px;">${p.name}</div>
+          <div style="font-size:11.5px;color:var(--muted);">${p.category} · R$ ${fmtBRL(p.pricePerThousand)}/milheiro</div>
+        </div>
+        <span class="badge-stock ${cls}" style="font-size:11px;padding:4px 12px;border-radius:999px;font-weight:700;">${p.stock} milh.</span>`;
+      lowBox.appendChild(row);
+    });
+  }
+}
+
+/* =========================================================================
+ *  PRODUCTS — render + edição inline + modal
+ * ========================================================================= */
+function renderProducts() {
+  const grid = $('#productsGrid'); grid.innerHTML = '';
+  const q = state.productSearch.toLowerCase();
+  const list = state.products.filter(p =>
+    !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)
+  );
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><em>Nenhuma peça encontrada.</em></div>';
+    return;
+  }
+  list.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product';
+    const stockClass = p.stock === 0 ? 'zero' : (p.stock <= 5 ? 'low' : 'ok');
+    const stockTxt = p.stock === 0 ? 'Esgotado' : (p.stock <= 5 ? 'Estoque baixo' : 'Em estoque');
+    const specsHtml = (p.specs||[]).slice(0,4).map(([k,v]) =>
+      `<span class="k">${k}</span><span class="v">${v}</span>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="thumb">
+        <span class="badge-cat">${p.category}</span>
+        <span class="badge-stock ${stockClass}">${stockTxt}</span>
+        ${productThumb(p)}
+      </div>
+      <div class="body">
+        <h3>${p.name}<span class="id-pill mono">${p.id}</span></h3>
+        <div class="specs">${specsHtml || '<span class="full"><span class="k">—</span></span>'}</div>
+      </div>
+      <div class="inline-row">
+        <div class="inline-field">
+          <label>Preço/milheiro</label>
+          <div class="input-wrap">
+            <span class="prefix">R$</span>
+            <input type="number" min="0" step="0.01" value="${p.pricePerThousand}" data-edit="price" data-id="${p.id}" />
+            <span class="saved">✓</span>
+          </div>
+        </div>
+        <div class="inline-field">
+          <label>Estoque</label>
+          <div class="input-wrap">
+            <input type="number" min="0" step="1" value="${p.stock}" data-edit="stock" data-id="${p.id}" />
+            <span class="suffix">milh.</span>
+            <span class="saved">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost sm" onclick="openProductModal('${p.id}')">✎ Editar tudo</button>
+        <button class="btn green sm" onclick="useInBroadcast('${p.id}')">↗ Disparo</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Bind inline edits
+  $$('#productsGrid input[data-edit]').forEach(input => {
+    input.addEventListener('change', () => {
+      const id = input.dataset.id;
+      const field = input.dataset.edit;
+      const product = findProduct(id);
+      if (!product) return;
+      const val = parseFloat(input.value) || 0;
+      if (field === 'price') product.pricePerThousand = val;
+      if (field === 'stock') product.stock = Math.max(0, Math.floor(val));
+      // Show ✓
+      const saved = input.parentElement.querySelector('.saved');
+      saved.classList.add('on');
+      setTimeout(() => saved.classList.remove('on'), 900);
+      // Re-render KPIs e badges (sem destruir o foco do input)
+      renderOverview();
+      // Atualizar badge de estoque do card sem reconstruir
+      const card = input.closest('.product');
+      const badge = card.querySelector('.badge-stock');
+      const newClass = product.stock === 0 ? 'zero' : (product.stock <= 5 ? 'low' : 'ok');
+      const newTxt = product.stock === 0 ? 'Esgotado' : (product.stock <= 5 ? 'Estoque baixo' : 'Em estoque');
+      badge.className = 'badge-stock ' + newClass;
+      badge.textContent = newTxt;
+    });
+    input.addEventListener('focus', () => input.select());
+  });
+}
+$('#productSearch').addEventListener('input', e => {
+  state.productSearch = e.target.value; renderProducts();
+});
+
+/* MODAL DE PRODUTO (criar + editar) */
+function openProductModal(id=null) {
+  state.editingProductId = id;
+  const p = id ? findProduct(id) : null;
+  $('#productModalTitle').textContent = p ? 'Editar peça' : 'Cadastrar peça';
+  $('#productModalDesc').textContent  = p ? `Alterar dados de "${p.name}".` : 'Telha, lajota, cobogó ou outro item do catálogo.';
+  $('#pName').value     = p ? p.name : '';
+  $('#pCategory').value = p ? p.category : 'Telhas';
+  $('#pColor').value    = p ? (p.color || 'terra') : 'terra';
+  $('#pPrice').value    = p ? p.pricePerThousand : '';
+  $('#pStock').value    = p ? p.stock : '';
+  state.pendingSpecs = p ? p.specs.map(s => [...s]) : [['','']];
+  renderSpecsEditor();
+  $('#productDeleteBtn').style.display = p ? 'inline-flex' : 'none';
+  $('#productModal').classList.add('on');
+  setTimeout(() => $('#pName').focus(), 50);
+}
+function renderSpecsEditor() {
+  const box = $('#specsEditor'); box.innerHTML = '';
+  state.pendingSpecs.forEach((spec, idx) => {
+    const row = document.createElement('div');
+    row.className = 'spec-row';
+    row.innerHTML = `
+      <input type="text" placeholder="Atributo (ex: Peso por peça)" value="${spec[0]||''}" data-spec-idx="${idx}" data-spec-field="0"/>
+      <input type="text" placeholder="Valor (ex: 1.800 kg)" value="${spec[1]||''}" data-spec-idx="${idx}" data-spec-field="1"/>
+      <button class="btn ghost" type="button" onclick="removeSpecRow(${idx})" title="Remover">×</button>
+    `;
+    box.appendChild(row);
+  });
+  $$('#specsEditor input').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const idx = parseInt(e.target.dataset.specIdx);
+      const f   = parseInt(e.target.dataset.specField);
+      state.pendingSpecs[idx][f] = e.target.value;
+    });
+  });
+}
+function addSpecRow() {
+  state.pendingSpecs.push(['','']);
+  renderSpecsEditor();
+}
+function removeSpecRow(idx) {
+  state.pendingSpecs.splice(idx, 1);
+  if (!state.pendingSpecs.length) state.pendingSpecs = [['','']];
+  renderSpecsEditor();
+}
+function saveProduct() {
+  const name = $('#pName').value.trim();
+  const category = $('#pCategory').value;
+  const color = $('#pColor').value;
+  const price = parseFloat($('#pPrice').value) || 0;
+  const stock = parseInt($('#pStock').value) || 0;
+  if (!name) { toast('Dê um nome à peça.', 'error'); return; }
+  const cleanSpecs = state.pendingSpecs.filter(s => s[0].trim() && s[1].trim());
+
+  if (state.editingProductId) {
+    const p = findProduct(state.editingProductId);
+    Object.assign(p, { name, category, color, pricePerThousand: price, stock, specs: cleanSpecs });
+    toast('Peça atualizada.', 'success');
+  } else {
+    state.products.push({
+      id: 'p_'+uid(), name, category, color,
+      pricePerThousand: price, stock, specs: cleanSpecs
+    });
+    toast('Peça cadastrada.', 'success');
+  }
+  closeModals(); renderAll();
+}
+function deleteFromModal() {
+  if (!state.editingProductId) return;
+  const p = findProduct(state.editingProductId);
+  if (!confirm(`Remover "${p.name}" do catálogo?`)) return;
+  state.products = state.products.filter(x => x.id !== state.editingProductId);
+  if (state.selectedProductId === state.editingProductId) state.selectedProductId = null;
+  closeModals(); renderAll(); toast('Peça removida.');
+}
+
+/* =========================================================================
+ *  CUSTOMERS
+ * ========================================================================= */
+function renderCustomers() {
+  const tb = $('#customersBody'); tb.innerHTML = '';
+  const q = state.customerSearch.toLowerCase();
+  const list = state.customers.filter(c =>
+    !q ||
+    c.name.toLowerCase().includes(q) ||
+    c.phone.includes(q) ||
+    (c.city||'').toLowerCase().includes(q) ||
+    c.tags.some(t => t.toLowerCase().includes(q))
+  );
+  if (!list.length) {
+    tb.innerHTML = '<tr><td colspan="5" class="empty"><em>Nenhum cliente encontrado.</em></td></tr>';
+    return;
+  }
+  list.forEach(c => {
+    const tagsHtml = c.tags.map(t => `<span class="tag ${slug(t)}">${t}</span>`).join('');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${c.name}</strong></td>
+      <td class="mono" style="font-size:13px;">${fmtPhone(c.phone)}</td>
+      <td>${tagsHtml}</td>
+      <td style="color:var(--muted);">${c.city || '—'}</td>
+      <td style="text-align:right;white-space:nowrap;">
+        <a class="btn ghost sm" href="https://wa.me/55${sanitizePhone(c.phone)}" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn ghost sm" onclick="openCustomerModal('${c.id}')">✎</button>
+      </td>`;
+    tb.appendChild(tr);
+  });
+}
+$('#customerSearch').addEventListener('input', e => {
+  state.customerSearch = e.target.value; renderCustomers();
+});
+
+function openCustomerModal(id=null) {
+  state.editingCustomerId = id;
+  const c = id ? findCustomer(id) : null;
+  $('#customerModalTitle').textContent = c ? 'Editar cliente' : 'Cadastrar cliente';
+  $('#cName').value  = c ? c.name : '';
+  $('#cPhone').value = c ? c.phone : '';
+  $('#cCity').value  = c ? (c.city||'') : '';
+  $('#cTags').value  = c ? c.tags.join(', ') : '';
+  $('#customerDeleteBtn').style.display = c ? 'inline-flex' : 'none';
+  $('#customerModal').classList.add('on');
+  setTimeout(() => $('#cName').focus(), 50);
+}
+function saveCustomer() {
+  const name  = $('#cName').value.trim();
+  const phone = sanitizePhone($('#cPhone').value);
+  const city  = $('#cCity').value.trim();
+  const tags  = $('#cTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if (!name || !phone) { toast('Nome e WhatsApp são obrigatórios.', 'error'); return; }
+  if (phone.length < 10) { toast('Telefone parece inválido — use DDD + número.', 'error'); return; }
+
+  if (state.editingCustomerId) {
+    const c = findCustomer(state.editingCustomerId);
+    Object.assign(c, { name, phone, city, tags });
+    toast('Cliente atualizado.', 'success');
+  } else {
+    state.customers.push({ id: 'c_'+uid(), name, phone, city, tags });
+    toast('Cliente cadastrado.', 'success');
+  }
+  closeModals(); renderAll();
+}
+function deleteCustomerFromModal() {
+  if (!state.editingCustomerId) return;
+  const c = findCustomer(state.editingCustomerId);
+  if (!confirm(`Remover "${c.name}" da base?`)) return;
+  state.customers = state.customers.filter(x => x.id !== state.editingCustomerId);
+  closeModals(); renderAll(); toast('Cliente removido.');
+}
+
+/* =========================================================================
+ *  BROADCAST
+ * ========================================================================= */
+function renderBroadcastTags() {
+  const box = $('#tagChips'); box.innerHTML = '';
+  const tags = allTags();
+  if (!tags.length) {
+    box.innerHTML = '<div class="empty" style="padding:20px;width:100%;"><em>Cadastre clientes com tags para começar.</em></div>';
+    return;
+  }
+  const allChip = document.createElement('div');
+  allChip.className = 'chip' + (state.selectedTags.length === 0 ? ' on' : '');
+  allChip.innerHTML = `<span>Todos</span><span class="x">${state.customers.length}</span>`;
+  allChip.onclick = () => { state.selectedTags = []; renderBroadcast(); };
+  box.appendChild(allChip);
+
+  tags.forEach(t => {
+    const count = state.customers.filter(c => c.tags.includes(t)).length;
+    const chip = document.createElement('div');
+    const on = state.selectedTags.includes(t);
+    chip.className = 'chip' + (on ? ' on' : '');
+    chip.innerHTML = `<span>${t}</span><span class="x">${count}</span>`;
+    chip.onclick = () => {
+      state.selectedTags = on
+        ? state.selectedTags.filter(x => x !== t)
+        : [...state.selectedTags, t];
+      renderBroadcast();
+    };
+    box.appendChild(chip);
+  });
+}
+
+function renderProductPick() {
+  const box = $('#productPick'); box.innerHTML = '';
+  if (!state.products.length) {
+    box.innerHTML = '<div class="empty" style="grid-column:1/-1"><em>Sem peças no catálogo.</em></div>';
+    return;
+  }
+  const noneItem = document.createElement('div');
+  noneItem.className = 'item' + (!state.selectedProductId ? ' on' : '');
+  noneItem.innerHTML = `
+    <div class="mini" style="display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);">∅</div>
+    <div class="info"><b>Sem peça</b><span>mensagem livre</span></div>`;
+  noneItem.onclick = () => { state.selectedProductId = null; renderBroadcast(); };
+  box.appendChild(noneItem);
+
+  state.products.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'item' + (state.selectedProductId === p.id ? ' on' : '');
+    item.innerHTML = `
+      <div class="mini">${productThumb(p)}</div>
+      <div class="info">
+        <b>${p.name}</b>
+        <span>R$ ${fmtBRL(p.pricePerThousand)}/milh · ${p.stock} milh.</span>
+      </div>`;
+    item.onclick = () => { state.selectedProductId = p.id; renderBroadcast(); };
+    box.appendChild(item);
+  });
+}
+
+function getRecipients() {
+  if (state.selectedTags.length === 0) return state.customers;
+  return state.customers.filter(c => state.selectedTags.every(t => c.tags.includes(t)));
+}
+
+function renderRecipients() {
+  const list = getRecipients();
+  const box = $('#recipientList'); box.innerHTML = '';
+  $('#recipientCount').textContent = list.length;
+  $('#dispatchCount').textContent = `${list.length} contato${list.length !== 1 ? 's' : ''}`;
+
+  if (!list.length) {
+    box.innerHTML = '<div class="empty"><em>Nenhum contato bate com esses filtros.</em></div>';
+    return;
+  }
+  list.forEach(c => {
+    const link = buildLinkFor(c);
+    const row = document.createElement('div');
+    row.className = 'recipient';
+    row.innerHTML = `
+      <div><strong>${c.name}</strong><span class="phone">· ${fmtPhone(c.phone)}</span></div>
+      <a class="open" href="${link}" target="_blank" rel="noopener">abrir</a>`;
+    box.appendChild(row);
+  });
+}
+
+function applyTemplate(tpl, customer, product) {
+  let out = tpl || '';
+  out = out.replaceAll('{{nome}}',    customer ? customer.name.split(' ')[0] : '');
+  out = out.replaceAll('{{produto}}', product  ? product.name : '');
+  out = out.replaceAll('{{preco}}',   product  ? `R$ ${fmtBRL(product.pricePerThousand)}` : '');
+  out = out.replaceAll('{{cidade}}',  customer ? (customer.city || 'sua cidade') : 'sua cidade');
+  return out;
+}
+
+function buildLinkFor(customer) {
+  const product = findProduct(state.selectedProductId);
+  const text = applyTemplate(state.messageText, customer, product);
+  return `https://wa.me/55${sanitizePhone(customer.phone)}?text=${encodeURIComponent(text)}`;
+}
+
+function renderPreview() {
+  const sample = getRecipients()[0];
+  const product = findProduct(state.selectedProductId);
+  const txt = applyTemplate(state.messageText, sample, product);
+  $('#messagePreview').textContent = txt || 'Sua mensagem aparecerá aqui…';
+}
+
+function renderBroadcast() {
+  renderBroadcastTags();
+  renderProductPick();
+  renderRecipients();
+  renderPreview();
+}
+
+$('#messageText').addEventListener('input', e => {
+  state.messageText = e.target.value; renderPreview();
+});
+$('.placeholders').addEventListener('click', e => {
+  const code = e.target.closest('code'); if (!code) return;
+  const ta = $('#messageText');
+  const tag = code.dataset.tag;
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  ta.value = ta.value.slice(0, start) + tag + ta.value.slice(end);
+  ta.focus();
+  ta.selectionStart = ta.selectionEnd = start + tag.length;
+  state.messageText = ta.value; renderPreview();
+});
+
+function dispatchAll() {
+  const list = getRecipients();
+  if (!list.length) { toast('Nenhum destinatário selecionado.', 'error'); return; }
+  if (list.length > 5 && !confirm(`Abrir ${list.length} janelas do WhatsApp Web? O navegador pode bloquear pop-ups.`)) return;
+  list.forEach((c, i) => {
+    setTimeout(() => window.open(buildLinkFor(c), '_blank'), i * 250);
+  });
+  toast(`Abrindo ${list.length} conversa(s)…`, 'success');
+}
+
+function copyAllLinks() {
+  const list = getRecipients();
+  if (!list.length) { toast('Nenhum destinatário.', 'error'); return; }
+  const txt = list.map(c => `${c.name} → ${buildLinkFor(c)}`).join('\n');
+  navigator.clipboard.writeText(txt).then(
+    () => toast(`${list.length} link(s) copiado(s)!`, 'success'),
+    () => toast('Não consegui copiar — verifique permissões.', 'error')
+  );
+}
+
+function useInBroadcast(productId) {
+  state.selectedProductId = productId;
+  switchTab('broadcast');
+  renderBroadcast();
+  toast('Peça selecionada no disparo.', 'success');
+}
+
+/* =========================================================================
+ *  CHAT — renderização + IA mock + handoff humano
+ * ========================================================================= */
+function renderChatList() {
+  const box = $('#chatListItems'); box.innerHTML = '';
+  const sorted = [...state.conversations].sort((a,b) => {
+    const ta = a.messages[a.messages.length-1]?.ts || 0;
+    const tb = b.messages[b.messages.length-1]?.ts || 0;
+    return tb - ta;
+  });
+  $('#chatListSummary').textContent = `${sorted.length} ativa${sorted.length !== 1 ? 's' : ''} · ${sorted.filter(c=>c.unread).length} não lida(s)`;
+
+  if (!sorted.length) {
+    box.innerHTML = '<div class="empty"><em>Sem conversas.</em>Use "Simular nova mensagem" para testar.</div>';
+    return;
+  }
+  sorted.forEach(conv => {
+    const cust = findCustomer(conv.customerId);
+    if (!cust) return;
+    const last = conv.messages[conv.messages.length-1];
+    const item = document.createElement('div');
+    item.className = 'chat-item' + (conv.id === state.activeConvId ? ' active' : '');
+    item.innerHTML = `
+      <div class="row1">
+        <div class="name">${cust.name}</div>
+        <div class="ts">${last ? tsLabel(last.ts) : ''}</div>
+      </div>
+      <div class="row2">
+        <div class="preview">${last ? (last.from === 'customer' ? '' : '↪ ') + (last.text||'') : 'Sem mensagens'}</div>
+        <div class="badges">
+          ${conv.unread ? '<span class="unread-dot"></span>' : ''}
+          <span class="status-pill ${conv.status}">${conv.status === 'ai' ? 'IA' : 'humano'}</span>
+        </div>
+      </div>`;
+    item.onclick = () => openConversation(conv.id);
+    box.appendChild(item);
+  });
+}
+
+function openConversation(id) {
+  const conv = findConv(id); if (!conv) return;
+  state.activeConvId = id;
+  conv.unread = false;
+  renderChatList();
+  renderActiveConversation();
+  renderOverview();
+}
+
+function renderActiveConversation() {
+  const conv = findConv(state.activeConvId);
+  if (!conv) {
+    $('#chatHead').style.display = 'none';
+    $('#chatInputArea').style.display = 'none';
+    $('#chatMsgs').innerHTML = '<div class="empty" style="margin:auto;"><em>Nenhuma conversa selecionada.</em>Clica em uma conversa à esquerda para abrir.</div>';
+    return;
+  }
+  const cust = findCustomer(conv.customerId);
+  $('#chatHead').style.display = 'flex';
+  $('#chatInputArea').style.display = 'block';
+
+  $('#chatAvatar').textContent = initials(cust.name);
+  $('#chatName').textContent   = cust.name;
+  $('#chatPhone').textContent  = `${fmtPhone(cust.phone)} · ${cust.city||'—'}`;
+
+  // Controles do header
+  const ctrl = $('#chatControls'); ctrl.innerHTML = '';
+  if (conv.status === 'ai') {
+    const btnTake = document.createElement('button');
+    btnTake.className = 'btn green sm';
+    btnTake.innerHTML = '👤 Assumir conversa';
+    btnTake.onclick = () => takeOver(conv.id);
+    ctrl.appendChild(btnTake);
+  } else {
+    const btnGive = document.createElement('button');
+    btnGive.className = 'btn ghost sm';
+    btnGive.innerHTML = '🤖 Devolver pra IA';
+    btnGive.onclick = () => giveBackToAI(conv.id);
+    ctrl.appendChild(btnGive);
+  }
+  const btnWa = document.createElement('a');
+  btnWa.className = 'btn ghost sm';
+  btnWa.href = `https://wa.me/55${sanitizePhone(cust.phone)}`;
+  btnWa.target = '_blank';
+  btnWa.textContent = 'Abrir WhatsApp';
+  ctrl.appendChild(btnWa);
+
+  // Mensagens
+  const msgsBox = $('#chatMsgs'); msgsBox.innerHTML = '';
+  conv.messages.forEach(m => {
+    const el = document.createElement('div');
+    el.className = `msg from-${m.from}`;
+    el.innerHTML = `${escapeHtml(m.text)}<div class="ts">${new Date(m.ts).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div>`;
+    msgsBox.appendChild(el);
+  });
+  msgsBox.scrollTop = msgsBox.scrollHeight;
+
+  // Banner + input
+  const banner = $('#aiBanner');
+  const input  = $('#chatInput');
+  const sendBtn= $('#chatSendBtn');
+  if (conv.status === 'ai') {
+    banner.className = 'ai-banner';
+    banner.innerHTML = `
+      <span><b>🤖 IA respondendo automaticamente.</b> Para escrever você mesmo, clique em "Assumir conversa".</span>`;
+    input.disabled = true;
+    sendBtn.disabled = true;
+    input.placeholder = 'IA atendendo · clique em Assumir para digitar';
+  } else {
+    banner.className = 'ai-banner taken';
+    banner.innerHTML = `<span><b>👤 Você está atendendo.</b> A IA não vai responder até você devolver.</span>`;
+    input.disabled = false;
+    sendBtn.disabled = false;
+    input.placeholder = 'Digite uma mensagem…';
+    setTimeout(() => input.focus(), 100);
+  }
+}
+
+function escapeHtml(s) {
+  return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+async function takeOver(convId) {
+  const conv = findConv(convId); if (!conv) return;
+  conv.status = 'human';
+  toast('Você assumiu a conversa.', 'success');
+  renderChatList();
+  renderActiveConversation();
+  // Notifica o backend
+  if (state.evoBackendUrl && conv.phone) {
+    fetch(`${state.evoBackendUrl}/api/send`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ convId, action: 'takeover' }),
+    }).catch(() => {});
+  }
+}
+async function giveBackToAI(convId) {
+  const conv = findConv(convId); if (!conv) return;
+  conv.status = 'ai';
+  toast('IA reativada nessa conversa.', 'success');
+  renderChatList();
+  renderActiveConversation();
+  if (state.evoBackendUrl && conv.phone) {
+    fetch(`${state.evoBackendUrl}/api/send`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ convId, action: 'givebackai' }),
+    }).catch(() => {});
+  }
+}
+
+async function sendHumanMsg() {
+  const conv = findConv(state.activeConvId); if (!conv) return;
+  if (conv.status !== 'human') return;
+  const ta = $('#chatInput');
+  const text = ta.value.trim(); if (!text) return;
+
+  // Otimista: adiciona localmente antes da resposta do backend
+  conv.messages.push({ from: 'human', text, ts: Date.now() });
+  ta.value = '';
+  renderActiveConversation();
+  renderChatList();
+
+  // Envia pelo backend (Vercel) → Evolution API → WhatsApp
+  if (state.evoBackendUrl && conv.phone) {
+    try {
+      const r = await fetch(`${state.evoBackendUrl}/api/send`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ convId: conv.id, text }),
+      });
+      if (!r.ok) {
+        const err = await r.json().catch(() => ({}));
+        toast('Erro ao enviar pelo WhatsApp: ' + (err.error || r.status), 'error');
+      }
+    } catch(e) {
+      toast('Sem conexão com o backend.', 'error');
+    }
+  }
+}
+$('#chatInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendHumanMsg();
+  }
+});
+
+/* === IA mock — gera resposta a partir do conteúdo === */
+function generateAIResponse(message, conv) {
+  const m = message.toLowerCase();
+  const cust = findCustomer(conv.customerId);
+  const firstName = cust ? cust.name.split(' ')[0] : 'amigo(a)';
+
+  // Saudação
+  if (/(\b(oi|ol[áa]|bom dia|boa tarde|boa noite|e a[ií])\b)/.test(m)) {
+    return `Olá ${firstName}! Aqui é da Cerâmica Gatto. 🏠 Como posso te ajudar?`;
+  }
+  // Urgência → handoff sugerido
+  if (/(urgent|hoje|agora|imediato|preciso j[aá])/.test(m)) {
+    setTimeout(() => suggestHandoff(conv.id), 800);
+    return `Entendi a urgência, ${firstName}! Vou já chamar um atendente humano pra te dar prioridade.`;
+  }
+  // Preço
+  if (/(pre[çc]o|valor|quanto custa|or[çc]amento|milheiro)/.test(m)) {
+    const matched = matchProduct(m);
+    if (matched) {
+      return `O *${matched.name}* sai por *R$ ${fmtBRL(matched.pricePerThousand)} o milheiro*. Pra qual quantidade você precisa? Posso já te montar o orçamento com frete.`;
+    }
+    return `Trabalhamos com telhas (Colonial, Duplan Portuguesa, Plan Gatto, Copeira), lajotas (19x19x09, 29x19x09, 29x19x11,5, lajota para laje) e cobogós. Qual produto te interessa?`;
+  }
+  // Estoque / disponibilidade
+  if (/(estoque|tem dispon|tem em|tem pronto|pronta entrega)/.test(m)) {
+    const matched = matchProduct(m);
+    if (matched) {
+      const status = matched.stock === 0 ? 'sem estoque no momento — posso te avisar quando voltar' :
+                     matched.stock <= 5 ? `com estoque limitado (${matched.stock} milheiros)` :
+                     `com pronta entrega (${matched.stock} milheiros disponíveis)`;
+      return `${matched.name} está ${status}. Quer que eu reserve uma quantidade?`;
+    }
+    return `Temos pronta entrega da maioria dos itens. Me diz qual peça você precisa que eu confirmo o estoque.`;
+  }
+  // Entrega / frete
+  if (/(entrega|frete|envio|transporte|levar|chegar)/.test(m)) {
+    return `Entregamos com frete próprio em toda a região Sul da Bahia (Teixeira de Freitas, Itamaraju, Eunápolis, Porto Seguro, Caravelas, Itabela e cidades vizinhas). Pra qual cidade seria? O valor varia por distância e quantidade.`;
+  }
+  // Ficha técnica
+  if (/(ficha|t[ée]cnic|especifica|peso|dimens|medida)/.test(m)) {
+    const matched = matchProduct(m);
+    if (matched && matched.specs && matched.specs.length) {
+      const top = matched.specs.slice(0,4).map(([k,v]) => `• ${k}: ${v}`).join('\n');
+      return `Ficha técnica da *${matched.name}*:\n${top}\n\nPosso enviar mais detalhes ou montar um orçamento?`;
+    }
+    return `Posso te passar a ficha técnica completa. Qual produto você quer consultar?`;
+  }
+  // Catálogo
+  if (/(cat[áa]logo|produtos|o que voc[êe]s|quais|tipos)/.test(m)) {
+    const cats = [...new Set(state.products.map(p => p.category))];
+    return `Trabalhamos com: ${cats.join(', ')}. Total de ${state.products.length} produtos no catálogo. Qual categoria te interessa?`;
+  }
+  // Agradecimento
+  if (/(obrigad|valeu|beleza|t[áa] bom|legal)/.test(m)) {
+    return `Imagina, ${firstName}! Estamos aqui pelo que precisar. 🙌`;
+  }
+  // Default
+  return `Recebi sua mensagem, ${firstName}. Pode me dar mais detalhes do que precisa? Posso ajudar com informações de produtos, preços, estoque ou orçamento.`;
+}
+
+function matchProduct(text) {
+  const t = text.toLowerCase();
+  // tenta achar produto cujo nome ou parte dele aparece no texto
+  const candidates = state.products.map(p => {
+    const tokens = p.name.toLowerCase().split(/\s+/);
+    const hits = tokens.filter(tok => tok.length > 2 && t.includes(tok)).length;
+    return { p, hits };
+  });
+  candidates.sort((a,b) => b.hits - a.hits);
+  return candidates[0]?.hits > 0 ? candidates[0].p : null;
+}
+
+function suggestHandoff(convId) {
+  // Pisca o botão "Assumir" se a conversa ainda estiver com a IA
+  const conv = findConv(convId);
+  if (!conv || conv.status !== 'ai' || convId !== state.activeConvId) return;
+  const btn = $('#chatControls .btn.green');
+  if (btn) {
+    btn.style.animation = 'pulse 1.2s 3';
+    setTimeout(() => btn.style.animation = '', 4000);
+  }
+}
+
+/* Simular nova mensagem entrando (cliente aleatório) */
+function simulateIncoming() {
+  const samples = [
+    'Bom dia! Tem telha plan gatto disponível?',
+    'Quanto custa o milheiro da lajota 19x19x9?',
+    'Vocês fazem entrega em Itamaraju?',
+    'Preciso de ficha técnica da Lajota para Laje',
+    'Olá, queria um orçamento de cobogó',
+  ];
+  const text = samples[Math.floor(Math.random()*samples.length)];
+
+  // 50% chance: nova conversa com cliente sem conversa
+  // 50% chance: mensagem em conversa existente
+  const customerWithoutConv = state.customers.find(c => !state.conversations.find(cv => cv.customerId === c.id));
+  let conv;
+  if (customerWithoutConv && Math.random() > 0.5) {
+    conv = {
+      id: 'conv_'+uid(),
+      customerId: customerWithoutConv.id,
+      status: 'ai', unread: true, messages: []
+    };
+    state.conversations.push(conv);
+  } else {
+    conv = state.conversations[Math.floor(Math.random()*state.conversations.length)];
+  }
+  conv.messages.push({ from: 'customer', text, ts: Date.now() });
+  conv.unread = true;
+  if (state.activeConvId === conv.id) conv.unread = false;
+  renderChatList();
+  if (state.activeConvId === conv.id) renderActiveConversation();
+  renderOverview();
+  toast('Nova mensagem recebida', 'success');
+
+  // Se IA estiver no controle, ela responde
+  if (conv.status === 'ai') {
+    respondWithAI(conv);
+  }
+}
+
+function respondWithAI(conv) {
+  // Mostrar "digitando…" se a conversa estiver aberta
+  if (state.activeConvId === conv.id) {
+    const msgsBox = $('#chatMsgs');
+    const typing = document.createElement('div');
+    typing.className = 'msg from-ai typing';
+    typing.id = 'typingIndicator';
+    typing.innerHTML = `digitando<span class="dots"><span></span><span></span><span></span></span>`;
+    msgsBox.appendChild(typing);
+    msgsBox.scrollTop = msgsBox.scrollHeight;
+  }
+  const lastMsg = conv.messages.filter(m => m.from === 'customer').slice(-1)[0];
+  const reply = generateAIResponse(lastMsg ? lastMsg.text : '', conv);
+  const delay = 1100 + Math.random()*1200;
+  setTimeout(() => {
+    if (conv.status !== 'ai') return; // humano assumiu nesse meio tempo
+    conv.messages.push({ from: 'ai', text: reply, ts: Date.now() });
+    if (state.activeConvId === conv.id) {
+      conv.unread = false;
+      const t = document.getElementById('typingIndicator');
+      if (t) t.remove();
+      renderActiveConversation();
+    } else {
+      conv.unread = true;
+    }
+    renderChatList();
+    renderOverview();
+  }, delay);
+}
+
+/* =========================================================================
+ *  MODAL CONTROLS
+ * ========================================================================= */
+function closeModals() {
+  $$('.modal-bg').forEach(m => m.classList.remove('on'));
+  state.editingProductId = null;
+  state.editingCustomerId = null;
+}
+$$('.modal-bg').forEach(m => m.addEventListener('click', e => {
+  if (e.target === m) closeModals();
+}));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModals();
+});
+
+/* =========================================================================
+ *  CLOCK
+ * ========================================================================= */
+function tickClock() {
+  const d = new Date();
+  $('#clockTime').textContent = d.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+  $('#clockDate').textContent = d.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' });
+}
+setInterval(tickClock, 30000); tickClock();
+
+/* =========================================================================
+ *  BOOT
+ * ========================================================================= */
+function renderAll() {
+  renderOverview();
+  renderProducts();
+  renderCustomers();
+  renderBroadcast();
+  renderChatList();
+  renderActiveConversation();
+}
+
+$('#messageText').value = state.messageText;
+renderAll();
+
+// Abrir primeira conversa ao entrar na aba pela primeira vez
+$('#tabs').addEventListener('click', e => {
+  const b = e.target.closest('button[data-tab="chat"]');
+  if (b && !state.activeConvId && state.conversations.length) {
+    setTimeout(() => openConversation(state.conversations[0].id), 50);
+  }
+});
+
+/* =========================================================================
+ *  EVOLUTION API — CONFIG MODAL + POLLING
+ * =========================================================================
+ * O painel detecta automaticamente se está rodando no Vercel.
+ * Se VERCEL_URL estiver disponível como meta tag, usa ela como backend.
+ * Caso contrário, o usuário configura manualmente via botão ⚙.
+ * ========================================================================= */
+
+// Modal de configuração da Evolution API
+function openEvoConfig() {
+  const current = state.evoBackendUrl || '';
+  const url = prompt(
+    '📡 URL do seu backend Vercel\n\nEx: https://ceramicagatto.vercel.app\n\nDeixe vazio para usar apenas modo offline (IA mock local):',
+    current
+  );
+  if (url === null) return; // cancelou
+  const clean = url.trim().replace(/\/$/, '');
+  state.evoBackendUrl = clean;
+  localStorage.setItem('evo_backend_url', clean);
+  if (clean) {
+    toast('Backend configurado! Testando conexão…', 'success');
+    startPolling();
+  } else {
+    toast('Modo offline ativado.', '');
+    updateEvoStatus(false, 'offline');
+  }
+}
+
+// Atualiza indicador de status no footer
+function updateEvoStatus(online, label) {
+  const dot  = $('#evoStatusDot');
+  const text = $('#evoStatusText');
+  if (!dot || !text) return;
+  dot.style.background  = online ? 'var(--green)' : (label === 'offline' ? 'var(--muted)' : 'var(--red)');
+  text.textContent = 'Evolution API: ' + (online ? 'conectada ✓' : (label || 'erro de conexão'));
+}
+
+// Mescla conversas vindas do backend com o estado local
+function mergeConversations(remoteConvs) {
+  let changed = false;
+  remoteConvs.forEach(rc => {
+    let local = state.conversations.find(c => c.id === rc.id || c.phone === rc.phone);
+    if (!local) {
+      // Nova conversa vinda do WhatsApp real
+      state.conversations.push({
+        id:         rc.id,
+        customerId: null,   // não tem vínculo com clientes mock
+        phone:      rc.phone,
+        name:       rc.name,
+        status:     rc.status,
+        unread:     rc.unread,
+        messages:   rc.messages || [],
+        updatedAt:  rc.updatedAt,
+      });
+      changed = true;
+    } else {
+      // Mescla mensagens novas
+      const localIds = new Set(local.messages.map(m => m.ts + '|' + m.from));
+      let added = false;
+      (rc.messages || []).forEach(m => {
+        const key = m.ts + '|' + m.from;
+        if (!localIds.has(key)) {
+          local.messages.push(m);
+          added = true;
+        }
+      });
+      if (added) {
+        local.status  = rc.status;
+        local.unread  = rc.unread;
+        local.updatedAt = rc.updatedAt;
+        changed = true;
+      }
+    }
+  });
+  return changed;
+}
+
+// Polling a cada 5 segundos
+let pollingInterval = null;
+async function pollMessages() {
+  if (!state.evoBackendUrl) return;
+  try {
+    const url = `${state.evoBackendUrl}/api/messages?since=${state.lastPollTs}`;
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) { updateEvoStatus(false, 'erro ' + r.status); return; }
+    const json = await r.json();
+    updateEvoStatus(true);
+    state.evoEnabled = true;
+    if (json.conversations?.length) {
+      const changed = mergeConversations(json.conversations);
+      state.lastPollTs = json.ts || Date.now();
+      if (changed) {
+        renderChatList();
+        if (state.activeConvId) renderActiveConversation();
+        renderOverview();
+        // Notificar novas mensagens não lidas
+        const unread = state.conversations.filter(c => c.unread && c.id !== state.activeConvId).length;
+        if (unread) toast(`${unread} nova(s) mensagem(ns) do WhatsApp`, 'success');
+      }
+    }
+  } catch(e) {
+    updateEvoStatus(false, 'sem conexão');
+  }
+}
+
+function startPolling() {
+  if (pollingInterval) clearInterval(pollingInterval);
+  pollMessages(); // imediato
+  pollingInterval = setInterval(pollMessages, 5000);
+}
+
+// Auto-iniciar polling se já tiver URL salva
+if (state.evoBackendUrl) {
+  startPolling();
+} else {
+  // Tenta detectar se estamos no Vercel (mesmo domínio)
+  const metaBackend = document.querySelector('meta[name="backend-url"]');
+  if (metaBackend) {
+    state.evoBackendUrl = metaBackend.content;
+    localStorage.setItem('evo_backend_url', metaBackend.content);
+    startPolling();
+  } else if (location.hostname !== 'localhost' && !location.hostname.includes('127.0.0.1') && !location.hostname.includes('github.io')) {
+    // Mesmo domínio do Vercel — usa URL relativa
+    state.evoBackendUrl = '';
+    // Usa fetch relativo
+    state._useRelativeApi = true;
+    startPolling();
+  }
+}
+</script>
+</body>
+</html>

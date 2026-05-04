@@ -1,0 +1,11 @@
+{
+  "name": "ceramicagatto",
+  "version": "0.2.0",
+  "description": "Painel interno Cerâmica Gatto com integração Evolution API",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {}
+}
