@@ -2088,8 +2088,9 @@ async function takeOver(convId) {
   renderChatList();
   renderActiveConversation();
   // Notifica o backend
-  if (state.evoBackendUrl && conv.phone) {
-    fetch(`${state.evoBackendUrl}/api/send`, {
+  if ((state.evoBackendUrl || state._useRelativeApi) && conv.phone) {
+    const baseUrl = state._useRelativeApi ? '' : state.evoBackendUrl;
+    fetch(`${baseUrl}/api/send`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ convId, action: 'takeover' }),
@@ -2102,8 +2103,9 @@ async function giveBackToAI(convId) {
   toast('IA reativada nessa conversa.', 'success');
   renderChatList();
   renderActiveConversation();
-  if (state.evoBackendUrl && conv.phone) {
-    fetch(`${state.evoBackendUrl}/api/send`, {
+  if ((state.evoBackendUrl || state._useRelativeApi) && conv.phone) {
+    const baseUrl = state._useRelativeApi ? '' : state.evoBackendUrl;
+    fetch(`${baseUrl}/api/send`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ convId, action: 'givebackai' }),
@@ -2124,9 +2126,10 @@ async function sendHumanMsg() {
   renderChatList();
 
   // Envia pelo backend (Vercel) → Evolution API → WhatsApp
-  if (state.evoBackendUrl && conv.phone) {
+  if ((state.evoBackendUrl || state._useRelativeApi) && conv.phone) {
     try {
-      const r = await fetch(`${state.evoBackendUrl}/api/send`, {
+      const baseUrl = state._useRelativeApi ? '' : state.evoBackendUrl;
+      const r = await fetch(`${baseUrl}/api/send`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ convId: conv.id, text }),
@@ -2427,9 +2430,10 @@ function mergeConversations(remoteConvs) {
 // Polling a cada 5 segundos
 let pollingInterval = null;
 async function pollMessages() {
-  if (!state.evoBackendUrl) return;
+  if (!state.evoBackendUrl && !state._useRelativeApi) return;
   try {
-    const url = `${state.evoBackendUrl}/api/messages?since=${state.lastPollTs}`;
+    const baseUrl = state._useRelativeApi ? '' : state.evoBackendUrl;
+    const url = `${baseUrl}/api/messages?since=${state.lastPollTs}`;
     const r = await fetch(url, { cache: 'no-store' });
     if (!r.ok) { updateEvoStatus(false, 'erro ' + r.status); return; }
     const json = await r.json();
@@ -2471,8 +2475,8 @@ if (state.evoBackendUrl) {
   } else if (location.hostname !== 'localhost' && !location.hostname.includes('127.0.0.1') && !location.hostname.includes('github.io')) {
     // Mesmo domínio do Vercel — usa URL relativa
     state.evoBackendUrl = '';
-    // Usa fetch relativo
     state._useRelativeApi = true;
+    console.log('📡 Detectado domínio de produção. Usando API relativa.');
     startPolling();
   }
 }
